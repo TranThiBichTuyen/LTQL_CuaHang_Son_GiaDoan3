@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             btnThoat = new Button();
             btnHuyBo = new Button();
             btnThem = new Button();
@@ -48,10 +50,10 @@
             // 
             // btnThoat
             // 
-            btnThoat.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnThoat.Location = new Point(919, 79);
+            btnThoat.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnThoat.Location = new Point(1034, 75);
             btnThoat.Name = "btnThoat";
-            btnThoat.Size = new Size(124, 29);
+            btnThoat.Size = new Size(140, 28);
             btnThoat.TabIndex = 2;
             btnThoat.Text = "Thoát";
             btnThoat.UseVisualStyleBackColor = true;
@@ -59,10 +61,10 @@
             // 
             // btnHuyBo
             // 
-            btnHuyBo.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnHuyBo.Location = new Point(774, 79);
+            btnHuyBo.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnHuyBo.Location = new Point(871, 75);
             btnHuyBo.Name = "btnHuyBo";
-            btnHuyBo.Size = new Size(124, 29);
+            btnHuyBo.Size = new Size(140, 28);
             btnHuyBo.TabIndex = 2;
             btnHuyBo.Text = "Huỷ Bỏ";
             btnHuyBo.UseVisualStyleBackColor = true;
@@ -70,10 +72,10 @@
             // 
             // btnThem
             // 
-            btnThem.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnThem.Location = new Point(194, 79);
+            btnThem.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnThem.Location = new Point(218, 75);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(124, 29);
+            btnThem.Size = new Size(140, 28);
             btnThem.TabIndex = 2;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = true;
@@ -81,10 +83,10 @@
             // 
             // btnLuu
             // 
-            btnLuu.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnLuu.Location = new Point(629, 79);
+            btnLuu.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLuu.Location = new Point(708, 75);
             btnLuu.Name = "btnLuu";
-            btnLuu.Size = new Size(124, 29);
+            btnLuu.Size = new Size(140, 28);
             btnLuu.TabIndex = 2;
             btnLuu.Text = "Lưu";
             btnLuu.UseVisualStyleBackColor = true;
@@ -92,10 +94,10 @@
             // 
             // btnSua
             // 
-            btnSua.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSua.Location = new Point(339, 79);
+            btnSua.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSua.Location = new Point(381, 75);
             btnSua.Name = "btnSua";
-            btnSua.Size = new Size(124, 29);
+            btnSua.Size = new Size(140, 28);
             btnSua.TabIndex = 2;
             btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = true;
@@ -103,10 +105,10 @@
             // 
             // btnXoa
             // 
-            btnXoa.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnXoa.Location = new Point(484, 79);
+            btnXoa.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnXoa.Location = new Point(544, 75);
             btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(124, 29);
+            btnXoa.Size = new Size(140, 28);
             btnXoa.TabIndex = 2;
             btnXoa.Text = "Xoá";
             btnXoa.UseVisualStyleBackColor = true;
@@ -122,36 +124,37 @@
             groupBox1.Controls.Add(btnLuu);
             groupBox1.Controls.Add(btnSua);
             groupBox1.Controls.Add(btnXoa);
-            groupBox1.Location = new Point(11, 15);
+            groupBox1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(12, 14);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1092, 123);
+            groupBox1.Size = new Size(1228, 117);
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin loại sản phẩm";
             // 
             // txtTenLoai
             // 
-            txtTenLoai.Location = new Point(194, 24);
+            txtTenLoai.Location = new Point(218, 23);
             txtTenLoai.Name = "txtTenLoai";
-            txtTenLoai.Size = new Size(838, 27);
+            txtTenLoai.Size = new Size(942, 30);
             txtTenLoai.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(8, 32);
+            label2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(9, 30);
             label2.Name = "label2";
-            label2.Size = new Size(160, 19);
+            label2.Size = new Size(188, 22);
             label2.TabIndex = 0;
             label2.Text = "Tên loại sản phẩm (*):";
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dataGridView);
-            groupBox2.Location = new Point(17, 153);
+            groupBox2.Location = new Point(19, 145);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1086, 283);
+            groupBox2.Size = new Size(1222, 269);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "Danh sách loại sản phẩm";
@@ -168,12 +171,14 @@
             dataGridView.MultiSelect = false;
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(1080, 257);
+            dataGridView.Size = new Size(1216, 243);
             dataGridView.TabIndex = 0;
             // 
             // ID
             // 
             ID.DataPropertyName = "ID";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ID.DefaultCellStyle = dataGridViewCellStyle1;
             ID.HeaderText = "ID";
             ID.MinimumWidth = 6;
             ID.Name = "ID";
@@ -181,19 +186,23 @@
             // TenLoai
             // 
             TenLoai.DataPropertyName = "TenLoai";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TenLoai.DefaultCellStyle = dataGridViewCellStyle2;
             TenLoai.HeaderText = "Tên loại sản phẩm";
             TenLoai.MinimumWidth = 6;
             TenLoai.Name = "TenLoai";
             // 
             // frmLoaiSanPham
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1119, 450);
+            ClientSize = new Size(1259, 428);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
+            Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "frmLoaiSanPham";
-            Text = "frmLoaiSanPham";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "LoaiSanPham";
             Load += frmLoaiSanPham_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

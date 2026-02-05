@@ -16,7 +16,8 @@ namespace QuanLy_CuaHang_Son.Forms
     {
         //khai báo biến toàn cục
         QLBHDbContext context = new QLBHDbContext(); //Khởi tạo biến ngữ cảnh CSDL
-        bool xulyThem = false;                  // kiểm tra có nhấn vào nút thêm hay không
+        bool xuLyThem = false;                  // kiểm tra có nhấn vào nút thêm hay không
+        bool xuLyTimKiem = false;               //kiểm tra có nhấn vào nút tìm kiếm hay không
         int id;                                 //lấy mã hãng sản xuất dùng cho sửa, xóa
         public frmHangSanXuat()
         {
@@ -28,7 +29,7 @@ namespace QuanLy_CuaHang_Son.Forms
             btnLuu.Enabled = giaTri;
             btnHuyBo.Enabled = giaTri;
 
-            txtTenHangSanXuat.Enabled = giaTri;
+            txtTenHangSanXuat.Enabled = giaTri || xuLyTimKiem;
             txtSĐTHangSanXuat.Enabled = giaTri;
             txtDiaChiHangSanXuat.Enabled = giaTri;
 
@@ -39,27 +40,10 @@ namespace QuanLy_CuaHang_Son.Forms
 
         private void frmHangSanXuat_Load(object sender, EventArgs e)
         {
+            xuLyThem = false;
+            xuLyTimKiem = false;
+
             BatTatChucNang(false);
-
-            //load địa chỉ
-            cboTinh.Items.Clear();
-            cboTinh.Items.AddRange(new string[]
-            {
-                "Hà Nội","TP. Hồ Chí Minh","Hải Phòng","Đà Nẵng","Cần Thơ","Huế",
-                "Hà Giang","Cao Bằng","Bắc Kạn","Tuyên Quang","Lào Cai","Yên Bái",
-                "Thái Nguyên","Lạng Sơn","Quảng Ninh","Bắc Giang","Phú Thọ",
-                "Vĩnh Phúc","Bắc Ninh","Hải Dương","Hưng Yên","Hà Nam",
-                "Nam Định","Thái Bình","Ninh Bình","Hòa Bình","Sơn La",
-                "Điện Biên","Lai Châu","Thanh Hóa","Nghệ An","Hà Tĩnh",
-                "Quảng Bình","Quảng Trị","Quảng Nam","Quảng Ngãi","Bình Định",
-                "Phú Yên","Khánh Hòa","Ninh Thuận","Bình Thuận","Kon Tum",
-                "Gia Lai","Đắk Lắk","Đắk Nông","Lâm Đồng","Bình Phước",
-                "Bình Dương","Đồng Nai","Bà Rịa - Vũng Tàu","Tây Ninh",
-                "Long An","Tiền Giang","Bến Tre","Trà Vinh","Vĩnh Long",
-                "Đồng Tháp","An Giang","Kiên Giang","Hậu Giang","Sóc Trăng",
-                "Bạc Liêu","Cà Mau"
-            });
-
             //Load hang sản xuất
             List<HangSanXuat> hsx = new List<HangSanXuat>();
             hsx = context.HangSanXuat.ToList();
@@ -83,7 +67,8 @@ namespace QuanLy_CuaHang_Son.Forms
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            xulyThem = true;
+            xuLyThem = true;
+            xuLyTimKiem = false;
             BatTatChucNang(true);
             txtTenHangSanXuat.Clear();
             txtTenHangSanXuat.Clear();
@@ -94,81 +79,89 @@ namespace QuanLy_CuaHang_Son.Forms
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            xulyThem = false;
+            xuLyThem = false;
+            xuLyTimKiem = false;
             BatTatChucNang(true);
             id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtTenHangSanXuat.Text))
+            // 1. Rỗng
+            if (string.IsNullOrWhiteSpace(txtTenHangSanXuat.Text) ||
+                string.IsNullOrWhiteSpace(txtSĐTHangSanXuat.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên hãng sản xuất?",
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không được bỏ trống!", "Lỗi");
+                return;
+            }
+
+            // 2. SĐT chỉ số
+            if (!txtSĐTHangSanXuat.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("SĐT chỉ chứa số!", "Lỗi");
+                return;
+            }
+
+            // 3. Đúng 10 số
+            if (txtSĐTHangSanXuat.Text.Length != 10)
+            {
+                MessageBox.Show("SĐT phải đủ 10 số!", "Lỗi");
+                return;
+            }
+
+            // 4. Trùng SĐT (KHÔNG dùng ?: )
+            bool trungSDT = false;
+            if (xuLyThem)
+            {
+                trungSDT = context.HangSanXuat.Any(hsx =>hsx.SoDienThoai == txtSĐTHangSanXuat.Text);
             }
             else
             {
-                if (xulyThem)
+                trungSDT = context.HangSanXuat.Any(hsx =>hsx.SoDienThoai == txtSĐTHangSanXuat.Text && hsx.ID != id);
+            }
+
+            if (trungSDT)
+            {
+                MessageBox.Show("Số điện thoại đã tồn tại!", "Lỗi");
+                return;
+            }
+
+            // 5. Lưu
+            if (xuLyThem)
+            {
+                HangSanXuat hsx = new HangSanXuat
                 {
-                    // ===== KHÔNG KIỂM TRA TRÙNG =====
-
-                    // XỬ LÝ ĐỊA CHỈ
-                    string diaChi = "";
-                    if (!string.IsNullOrWhiteSpace(txtDiaChiHangSanXuat.Text))
-                        diaChi = txtDiaChiHangSanXuat.Text;
-                    else
-                        diaChi = cboTinh.SelectedItem?.ToString();
-
-                    // THÊM
-                    HangSanXuat hsx = new HangSanXuat();
+                    TenHangSanXuat = txtTenHangSanXuat.Text,
+                    SoDienThoai = txtSĐTHangSanXuat.Text,
+                    DiaChi = txtDiaChiHangSanXuat.Text
+                };
+                context.HangSanXuat.Add(hsx);
+            }
+            else
+            {
+                HangSanXuat hsx = context.HangSanXuat.Find(id);
+                if (hsx != null)
+                {
                     hsx.TenHangSanXuat = txtTenHangSanXuat.Text;
                     hsx.SoDienThoai = txtSĐTHangSanXuat.Text;
-                    hsx.DiaChi = diaChi;
-
-                    context.HangSanXuat.Add(hsx);
-                    context.SaveChanges();
-
-                    MessageBox.Show("Thêm hãng sản xuất thành công!",
-                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    hsx.DiaChi = txtDiaChiHangSanXuat.Text;
                 }
-                else
-                {
-                    // XỬ LÝ SỬA
-                    HangSanXuat hsx = context.HangSanXuat.Find(id);
-                    if (hsx != null)
-                    {
-                        hsx.TenHangSanXuat = txtTenHangSanXuat.Text;
-                        hsx.SoDienThoai = txtSĐTHangSanXuat.Text;
-
-                        string diaChi = "";
-                        if (!string.IsNullOrWhiteSpace(txtDiaChiHangSanXuat.Text))
-                            diaChi = txtDiaChiHangSanXuat.Text;
-                        else
-                            diaChi = cboTinh.SelectedItem?.ToString();
-
-                        hsx.DiaChi = diaChi;
-
-                        context.SaveChanges();
-
-                        MessageBox.Show("Cập nhật hãng sản xuất thành công!",
-                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                frmHangSanXuat_Load(sender, e);
             }
+
+            context.SaveChanges();
+            frmHangSanXuat_Load(sender, e);
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
 
-            if (MessageBox.Show("Xac nhận xóa loại sản phẩm?", "Xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Xác nhận xoá hãng sản xuất?", "Xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
-                LoaiSanPham lsp = context.LoaiSanPham.Find(id);
-                if (lsp != null)
+                Data.HangSanXuat hsx = context.HangSanXuat.Find(id);
+                if (hsx != null)
                 {
-                    context.LoaiSanPham.Remove(lsp);
+                    context.HangSanXuat.Remove(hsx);
                 }
                 context.SaveChanges();
 
@@ -184,11 +177,19 @@ namespace QuanLy_CuaHang_Son.Forms
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            DialogResult traloi= MessageBox.Show("Bạn có chắc muốn thoát không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult traloi = MessageBox.Show("Bạn có chắc muốn thoát không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (traloi == DialogResult.Yes)
             {
                 this.Close();
             }
+        }
+
+        private void cboTinh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTinh.SelectedItem != null)
+            {
+                txtDiaChiHangSanXuat.Text = cboTinh.SelectedItem.ToString();
+            }
+        }
     }
-}
 }

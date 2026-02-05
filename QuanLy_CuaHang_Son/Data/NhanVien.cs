@@ -16,7 +16,9 @@ namespace QuanLy_CuaHang_Son.Data
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
         public bool QuyenHan { get; set; }
-
+        public DateTime NgaySinh { get; set; }
+        public string HinhThucLamViec { get; set; }
+        public string GioiTinh { get; set; }
         public virtual ObservableCollectionListSource<HoaDon> HoaDon { get; } = new();
     }
 }

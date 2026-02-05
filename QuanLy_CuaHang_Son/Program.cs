@@ -13,7 +13,9 @@ namespace QuanLy_CuaHang_Son
             ApplicationConfiguration.Initialize();
             //Application.Run(new Form1());
             //Application.Run(new Forms.frmLoaiSanPham());
-            Application.Run(new Forms.frmHangSanXuat());
+            //Application.Run(new Forms.frmHangSanXuat());
+           //Application.Run(new Forms.frmKhachHang());
+            Application.Run(new Forms.frmNhanVien());
         }
     }
 }

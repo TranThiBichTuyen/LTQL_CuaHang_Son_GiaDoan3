@@ -60,7 +60,7 @@ namespace QuanLy_CuaHang_Son.Forms
         {
             xulyThem = false;
             BatTatChucNang(true);
-            id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString);
+            id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace QuanLy_CuaHang_Son.Forms
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Xac nhận xóa loại sản phẩm?", "Xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Xác nhận xóa loại sản phẩm?", "Xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
                 LoaiSanPham lsp = context.LoaiSanPham.Find(id);
