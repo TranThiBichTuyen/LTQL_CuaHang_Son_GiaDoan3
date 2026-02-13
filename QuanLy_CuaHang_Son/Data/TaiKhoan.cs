@@ -14,14 +14,11 @@ namespace QuanLy_CuaHang_Son.Data
 
         public string MatKhau { get; set; } = null!;
 
-        public bool TrangThai { get; set; } // true: hoạt động, false: khóa
+        public string VaiTro { get; set; } = null!;
+        // Admin / QuanLy / NhanVien
 
         public int NhanVienID { get; set; }
 
-        public int PhanQuyenID { get; set; }
-
         public virtual NhanVien NhanVien { get; set; } = null!;
-
-        public virtual PhanQuyen PhanQuyen { get; set; } = null!;
     }
-    }
+}

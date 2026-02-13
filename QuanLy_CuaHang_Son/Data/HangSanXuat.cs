@@ -11,8 +11,8 @@ namespace QuanLy_CuaHang_Son.Data
     {
         public int ID { get; set; }
         public string TenHangSanXuat { get; set; }
-        public string SoDienThoai { get; set; }
-        public string DiaChi { get; set; }
+        public string? SoDienThoai { get; set; }
+        public string? DiaChi { get; set; }
         public virtual ObservableCollectionListSource<SanPham> SanPham { get; } = new();
 
     }

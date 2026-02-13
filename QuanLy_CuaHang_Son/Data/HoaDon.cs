@@ -13,9 +13,10 @@ namespace QuanLy_CuaHang_Son.Data
         public int NhanVienID { get; set; }
         public int KhachHangID { get; set; }
         public DateTime NgayLap { get; set; }
-        public string? GhiChuHoaDon { get; set; }
         public virtual ObservableCollectionListSource<HoaDon_ChiTiet> HoaDon_ChiTiet { get; } = new();
         public virtual KhachHang KhachHang { get; set; } = null!;
         public virtual NhanVien NhanVien { get; set; } = null!;
+        public virtual ObservableCollectionListSource<NhatKy_HoaDon> NhatKy_HoaDon { get; } = new();
+
     }
 }

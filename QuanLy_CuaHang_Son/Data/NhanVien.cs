@@ -19,6 +19,8 @@ namespace QuanLy_CuaHang_Son.Data
         public DateTime NgaySinh { get; set; }
         public string HinhThucLamViec { get; set; }
         public string GioiTinh { get; set; }
+        public virtual ObservableCollectionListSource<TaiKhoan> TaiKhoan { get; } = new();
+
         public virtual ObservableCollectionListSource<HoaDon> HoaDon { get; } = new();
     }
 }
